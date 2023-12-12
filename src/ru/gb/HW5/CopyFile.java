@@ -16,7 +16,7 @@ public class CopyFile {
         Files.createDirectories(Paths.get(dir));
         List<String> list = searchFile(new File("."));
         for (String s : list){
-            copyFile(s);
+            copyFile(s,dir);
         }
     }
 
@@ -28,15 +28,15 @@ public class CopyFile {
             return list;
         for (int i = 0; i < files.length; i++){
             if (files[i].isFile()){
-                list.add(files[i].getCanonicalPath());
+                list.add(String.valueOf(files[i]));
             }
         }
         return list;
     }
-    static void copyFile (String fileIn) throws IOException {
+    static void copyFile (String fileIn, String dir) throws IOException {
         // На запись
 
-        try (FileOutputStream fileOutputStream = new FileOutputStream(fileIn+"tt")) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(dir+"\\"+fileIn)) {
             int c;
             // На чтение
             try (FileInputStream fileInputStream = new FileInputStream(fileIn)) {

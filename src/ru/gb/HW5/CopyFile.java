@@ -13,9 +13,10 @@ public class CopyFile {
     public static void main(String[] args) throws IOException {
 
         String dir = "./backup";
+        Files.createDirectories(Paths.get(dir));
         List<String> list = searchFile(new File("."));
         for (String s : list){
-            copyFile(s, dir);
+            copyFile(s);
         }
     }
 
@@ -32,12 +33,11 @@ public class CopyFile {
         }
         return list;
     }
-    static void copyFile (String fileIn, String dir) throws IOException {
+    static void copyFile (String fileIn) throws IOException {
         // На запись
 
-        try (FileOutputStream fileOutputStream = new FileOutputStream(fileIn)) {
+        try (FileOutputStream fileOutputStream = new FileOutputStream(fileIn+"tt")) {
             int c;
-            Files.createDirectories(Paths.get(dir));
             // На чтение
             try (FileInputStream fileInputStream = new FileInputStream(fileIn)) {
                 while ((c = fileInputStream.read()) != -1) {
